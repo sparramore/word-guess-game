@@ -68,9 +68,6 @@ function resetGame()
         }
     }
 
-    var guessesLeftElement = document.getElementById("guesses-remaining");
-    guessesLeftElement.textContent = triesLeft;
-
 }
 
 resetGame();
