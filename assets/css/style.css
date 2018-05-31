@@ -1,0 +1,27 @@
+.mainHeader
+{
+    background-color: #333333;
+    
+}
+
+.headerText
+{
+    font-family: 'East Sea Dokdo', cursive;
+    color:blanchedalmond;
+}
+
+.leadText
+{
+    font-family: 'Indie Flower', cursive; 
+    color:blanchedalmond;
+}
+
+#instructions
+{
+    font-family: 'Indie Flower', cursive;
+    color:blanchedalmond;
+}
+
+#mainBody
+{
+}
