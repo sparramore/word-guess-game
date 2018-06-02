@@ -41,22 +41,21 @@ function resetGame()
     triesLeft = songArray[songNumber].answer.length + 5;   
     correctAnswer.assign(songArray[songNumber]);
     letterArray = [];
-    guessArray[correctAnswer.length];
     winCondition = correctAnswer.answer.length;
     correctGuesses = 0;
 
-    for(var i = 0;i < guessArray.length;i++)
-    {
-        guessArray[i] = "_";
-    }
+    guessArray.length = correctAnswer.answer.length;
 
-    window.onload = function()
+    for(var i = 0;i < correctAnswer.answer.length;i++)
     {
-        var guitarGuy = document.getElementById("airGuitar");
-        guitarGuy.style.display = "block";
-    
-        var spotify = document.getElementById("musicPlayer");
-        spotify.style.display = "none";
+        console.log("looking at the guess array")
+        guessArray[i] = "*";
+        if(correctAnswer.answer[i] === ' ')
+        {
+            console.log("houston we have spaces!");
+            guessArray[i] = '_';
+        }        
+
     }
 
     //give the user a free correct guess for all whitespace
@@ -68,6 +67,37 @@ function resetGame()
         }
     }
 
+
+    window.onload = function()
+    {
+        RefreshPage();
+
+        document.getElementById("resetButton").onclick = function () 
+        {
+            console.log("reset");
+            resetGame();
+            RefreshPage();
+        };
+        
+    }
+
+
+}
+
+function RefreshPage()
+{
+    var guitarGuy = document.getElementById("airGuitar");
+    guitarGuy.style.display = "block";
+
+    var spotify = document.getElementById("musicPlayer");
+    spotify.style.display = "none";
+
+    var Guess = document.getElementById("Guessed");
+    Guess.textContent = guessArray.join(' ');
+    console.log("this is the " + Guess.textContent);
+
+    var guessesLeftElement = document.getElementById("guesses-remaining");
+    guessesLeftElement.textContent = triesLeft;
 }
 
 resetGame();
@@ -77,12 +107,14 @@ function isValid(char)
     return !/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(char);
 }
 
+
 document.onkeyup = function(event)
 {
-    //we don't have any more tries and we lose.
+
     if(triesLeft <= 0)
     {
-        resetGame();
+        alert("YOU LOSE! GOOD DAY SIR");
+        document.location.reload(true);
     }
 
     var correctIndexes = [];
@@ -93,23 +125,15 @@ document.onkeyup = function(event)
 
     if(typeof char === "string" && isValid(char))
     {
-        console.log("log!")
+        console.log("letter array length: " + letterArray.length)
         //first see if we've already guessed this character
-        for(var i = 0;i < letterArray.length;i++)
+        if(letterArray.includes(char))
         {
-            console.log("letter array has stored: " + letterArray[i]);
-            //if we've already guess this character then return otherwise add it to the list of guesses
-             if(letterArray[i] === char)
-             {
-                 console.log("we've already guessed the letter: " + char);
-                 return;
-             }
-             else
-             {
-                 console.log("pushing the char: " + char);
-                 letterArray.push(char);
-                 break;
-             }
+            return;
+        }
+        else
+        {
+            letterArray.push(char);
         }
 
         //first time answering condition. probably could have done this a better way....
@@ -147,6 +171,9 @@ document.onkeyup = function(event)
                 correctGuesses += 1;
             }
             
+            var Guess = document.getElementById("Guessed");
+            Guess.textContent = guessArray.join(' ');
+
             console.log("guess array" + guessArray);
             console.log("winCondition" + winCondition);
             console.log("correctGuesses" + correctGuesses);
@@ -168,13 +195,9 @@ document.onkeyup = function(event)
 
             var winElement = document.getElementById("wins");
             winElement.textContent = wins;
-
-
-
-
-
-            
+    
         }
+
 
     }
 }
