@@ -34,6 +34,10 @@ songArray.push(new songObject("have love will travel","2uXkW8uJcOIhlbUatEPLPs"))
 songArray.push(new songObject("light it up","0TQ1FvC8TJ09iibSfwRP81"));
 songArray.push(new songObject("dance off","7pDxNYVQLKzrbkCe8OCag3"));
 songArray.push(new songObject("i trusted u","38ieFm5YofnBc2HAUHUxjm"));
+songArray.push(new songObject("blanket","2Q3eMS5vv9XwsXriji7lri"));
+songArray.push(new songObject("supercut","4qT0DUcwUHzbxXcitzRzwn"));
+songArray.push(new songObject("dance commander","3wY8GRMM7SuI2lbHfUdzu0"));
+songArray.push(new songObject("happy up here","1ixtaZc0Adil3yD1ItPqSl"));
 
 function resetGame()
 {
